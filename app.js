@@ -28,16 +28,17 @@ client.on('connected', function(address,port){
 
 client.on("action", function (channel, userstate, message, self) {
     console.log(message);
-    unreadMessages.push(message);
+    unreadMessages.push(message.toString());
 });
 
 
 
 //create a server object:
 http.createServer(function (req, res) {
+    console.log(unreadMessages);
     console.log(JSON.stringify(unreadMessages));
   res.write(JSON.stringify(unreadMessages));
-  unreadMessages = [];
+  unreadMessages.length = 0;
 
   res.end(); //end the response
 }).listen(8080); //the server object listens on port 8080
