@@ -1,4 +1,5 @@
 var tmi = require('tmi.js');
+var config = require('./config.json');
 
 var options = {
     options:{
@@ -10,7 +11,7 @@ var options = {
     },
     identity:{
         username: 'roverbothacked2018',
-        password: 'oauth:orrpsxxjr15pkz3v75cdw0cmsj53xj'
+        password: config.apiKey
     },
     channels: ['spear_rover']
 };
