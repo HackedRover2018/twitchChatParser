@@ -2,7 +2,9 @@
 var tmi = require('tmi.js');
 var http = require('http');
 var config = require('./config.json');
+var msg = "hello world -----------------------2";
 
+console.log(msg)
 var unreadMessages = [];
 
 var options = {
@@ -28,15 +30,16 @@ client.on('connected', function(address,port){
 });
 
 client.on("action", function (channel, userstate, message, self) {
-    console.log(message);
-    this.unreadMessages.push(message.toString());
-},this);
+});
 
+client.on("chat", function (channel, user, message, self) {
+    unreadMessages.push(message);
+});
 
 
 //create a server object:
 http.createServer(function (req, res) {
-  res.write(this.unreadMessages);
-
+  res.write(JSON.stringify(unreadMessages));
+  unreadMessages.length = 0;
   res.end(); //end the response
-},this).listen(8080); //the server object listens on port 8080
+}).listen(8080); //the server object listens on port 8080
