@@ -35,7 +35,7 @@ client.on("action", function (channel, userstate, message, self) {
 
 //create a server object:
 http.createServer(function (req, res) {
-  res.write(JSON.stringify(ureadMessages));
+  res.write(JSON.stringify(unreadMessages));
   unreadMessages = [];
 
   res.end(); //end the response
