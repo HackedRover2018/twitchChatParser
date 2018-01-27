@@ -1,3 +1,4 @@
+"use strict";
 var tmi = require('tmi.js');
 var http = require('http');
 var config = require('./config.json');
@@ -28,17 +29,14 @@ client.on('connected', function(address,port){
 
 client.on("action", function (channel, userstate, message, self) {
     console.log(message);
-    unreadMessages.push(message.toString());
-});
+    this.unreadMessages.push(message.toString());
+},this);
 
 
 
 //create a server object:
 http.createServer(function (req, res) {
-    console.log(unreadMessages);
-    console.log(JSON.stringify(unreadMessages));
-  res.write(JSON.stringify(unreadMessages));
-  unreadMessages.length = 0;
+  res.write(this.unreadMessages);
 
   res.end(); //end the response
-}).listen(8080); //the server object listens on port 8080
+},this).listen(8080); //the server object listens on port 8080
