@@ -2,9 +2,9 @@
 var tmi = require('tmi.js');
 var http = require('http');
 var config = require('./config.json');
-var msg = "hello world -----------------------2";
 
-console.log(msg)
+
+var testData = ['a','s','w','d','s','a','w','w','s','a','d','w'];
 var unreadMessages = [];
 
 var options = {
@@ -35,9 +35,11 @@ client.on("action", function (channel, userstate, message, self) {
 client.on("chat", function (channel, user, message, self) {
     if(message.toLowerCase() == "help"){
         client.action("spear_rover",user["display-name"] + ": a = left, w = forward, d = right, s = backward")
+    }else{
+        unreadMessages.push(message);
     }
     
-    unreadMessages.push(message);
+    
 });
 
 
