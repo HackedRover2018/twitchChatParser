@@ -5,6 +5,7 @@ var config = require('./config.json');
 
 
 var testData = ['a','s','w','d','s','a','w','w','s','a','d','w'];
+var validInstruction = ['a','s','w','d','f'];
 var unreadMessages = [];
 
 var options = {
@@ -35,17 +36,15 @@ client.on("action", function (channel, userstate, message, self) {
 client.on("chat", function (channel, user, message, self) {
     if(message.toLowerCase() == "help"){
         client.action("spear_rover",user["display-name"] + ": a = left, w = forward, d = right, s = backward")
-    }else{
-        unreadMessages.push(message);
+    }else if(validInstruction.includes(message.toLowerCase())){
+        unreadMessages.push(message.toLowerCase());
     }
-    
-    
 });
 
 
 //create a server object:
 http.createServer(function (req, res) {
-  res.write(JSON.stringify(testData));
+  res.write(JSON.stringify(unreadMessages));
   unreadMessages.length = 0;
   res.end(); //end the response
 }).listen(8080); //the server object listens on port 8080
