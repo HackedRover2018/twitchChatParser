@@ -33,6 +33,10 @@ client.on("action", function (channel, userstate, message, self) {
 });
 
 client.on("chat", function (channel, user, message, self) {
+    if(message.toLowerCase() == "help"){
+        client.action("spear_rover",user["display-name"] + ": a = left, w = forward, d = right, s = backward")
+    }
+    
     unreadMessages.push(message);
 });
 
