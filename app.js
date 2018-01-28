@@ -45,7 +45,7 @@ client.on("chat", function (channel, user, message, self) {
 
 //create a server object:
 http.createServer(function (req, res) {
-  res.write(JSON.stringify(unreadMessages));
+  res.write(JSON.stringify(testData));
   unreadMessages.length = 0;
   res.end(); //end the response
 }).listen(8080); //the server object listens on port 8080
